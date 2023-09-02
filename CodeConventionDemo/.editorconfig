@@ -15,8 +15,16 @@ dotnet_diagnostic.CA1000.severity = warning
 [*.{cs,vb}]
 # Common
 max_line_length = 120
-# IDE0055: Naming rule violation
+# IDE0005: Remove unnecessary using directives
+dotnet_diagnostic.IDE0005.severity = warning
+# IDE1006: Naming rule violation
 dotnet_diagnostic.IDE1006.severity = warning
+
+# CA1869: Cache and reuse 'JsonSerializerOptions' instances
+dotnet_diagnostic.CA1869.severity = warning
+
+# CA2245: Do not assign a property to itself
+dotnet_diagnostic.CA2245.severity = warning
 
 # ======= Groups =======
 #----------------------------- 
@@ -103,22 +111,22 @@ dotnet_naming_rule.local_variables_naming_rule.severity = warning
 # https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
 dotnet_naming_symbols.interface_group.applicable_kinds = interface
 dotnet_naming_rule.interface_rule.symbols              = interface_group
-dotnet_naming_rule.interface_rule.style                = prefix_interface_with_i_style
-dotnet_naming_rule.interface_rule.severity             = warning
+dotnet_naming_rule.interface_rule.style = prefix_interface_with_i_style
+dotnet_naming_rule.interface_rule.severity = warning
 
 # Generics Type Parameters use PascalCase and are prefixed with uppercase 'T'
 # https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
 dotnet_naming_symbols.type_parameter_group.applicable_kinds = type_parameter
 dotnet_naming_rule.type_parameter_rule.symbols              = type_parameter_group
-dotnet_naming_rule.type_parameter_rule.style                = prefix_type_parameters_with_t_style
-dotnet_naming_rule.type_parameter_rule.severity             = warning
+dotnet_naming_rule.type_parameter_rule.style = prefix_type_parameters_with_t_style
+dotnet_naming_rule.type_parameter_rule.severity = warning
 
 # Function parameters use camelCase
 # https://docs.microsoft.com/dotnet/standard/design-guidelines/naming-parameters
 dotnet_naming_symbols.parameters_group.applicable_kinds = parameter
 dotnet_naming_rule.parameters_rule.symbols              = parameters_group
-dotnet_naming_rule.parameters_rule.style                = camel_case_style
-dotnet_naming_rule.parameters_rule.severity             = warning
+dotnet_naming_rule.parameters_rule.style = camel_case_style
+dotnet_naming_rule.parameters_rule.severity = warning
 
 
 # Auto-generated settings
@@ -157,6 +165,7 @@ dotnet_style_qualification_for_property = false:silent
 dotnet_style_qualification_for_method = true:warning
 dotnet_style_qualification_for_event = false:silent
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
+dotnet_diagnostic.CA1041.severity = warning
 [*.cs]
 csharp_indent_labels = one_less_than_current
 csharp_using_directive_placement = outside_namespace:silent
