@@ -1,4 +1,6 @@
 # NOTE: No section headers for configuration entries
+# Reference for more: https://github.com/RehanSaeed/EditorConfig/blob/main/.editorconfig
+root = true
 
 #### .NET Coding Conventions ####
 
@@ -11,30 +13,115 @@ dotnet_style_qualification_for_method = true:warning
 dotnet_diagnostic.CA1000.severity = warning
 
 [*.{cs,vb}]
+# Common
+max_line_length = 120
+# IDE0055: Naming rule violation
+dotnet_diagnostic.IDE1006.severity = warning
+
+# ======= Groups =======
+#----------------------------- 
+
+# Define the 'interfaces' symbol group:
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+
+# Define the 'classes' symbol group:
+dotnet_naming_symbols.classes.applicable_kinds = interface, class, struct, enum, delegate, event
+
+# Define the 'methods' symbol group:
+dotnet_naming_symbols.methods.applicable_kinds = method, local_function
 
 # Define the 'private_fields' symbol group:
 dotnet_naming_symbols.private_fields.applicable_kinds = field
 dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+# Define the 'local_variables' symbol group:
+dotnet_naming_symbols.local_variables.applicable_kinds = local
 
 # Define the 'private_static_fields' symbol group
 dotnet_naming_symbols.private_static_fields.applicable_kinds = field
 dotnet_naming_symbols.private_static_fields.applicable_accessibilities = private
 dotnet_naming_symbols.private_static_fields.required_modifiers = static
 
+
+# ======= Styles =======
+#----------------------------- 
+# Define the 'camel-case' naming style
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+# Define the 'pascal-case' naming style
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
 # Define the 'underscored' naming style
 dotnet_naming_style.underscored.capitalization = camel_case
 dotnet_naming_style.underscored.required_prefix = _
 
+# Define the 'private_static_field_prefix_with_s' naming style
+dotnet_naming_style.private_static_field_prefix_with_s.capitalization = camel_case
+dotnet_naming_style.private_static_field_prefix_with_s.required_prefix = s_
+
+# prefix_type_parameters_with_t_style - Generic Type Parameters must be PascalCase and the first character must be a 'T'
+dotnet_naming_style.prefix_type_parameters_with_t_style.capitalization = pascal_case
+dotnet_naming_style.prefix_type_parameters_with_t_style.required_prefix = T
+
+# prefix_interface_with_i_style - Interfaces must be PascalCase and the first character of an interface must be an 'I'
+dotnet_naming_style.prefix_interface_with_i_style.capitalization = pascal_case
+dotnet_naming_style.prefix_interface_with_i_style.required_prefix = I
+
+
+# ======= Rules =======
+#------------------------------------------------------------------------------------ 
 # Define the 'private_fields_underscored' naming rule
 dotnet_naming_rule.private_fields_underscored.symbols = private_fields
 dotnet_naming_rule.private_fields_underscored.style = underscored
-dotnet_naming_rule.private_fields_underscored.severity = error
+dotnet_naming_rule.private_fields_underscored.severity = warning
 
-# Define the 'private_static_fields_none' naming rule
-dotnet_naming_rule.private_static_fields_none.symbols = private_static_fields
-dotnet_naming_rule.private_static_fields_none.style = underscored
-dotnet_naming_rule.private_static_fields_none.severity = none
-dotnet_style_operator_placement_when_wrapping = beginning_of_line
+# Define the 'private_static_fields' naming rule
+dotnet_naming_rule.private_static_fields_underscoreds.symbols = private_static_fields
+dotnet_naming_rule.private_static_fields_underscoreds.style = private_static_field_prefix_with_s
+dotnet_naming_rule.private_static_fields_underscoreds.severity = warning
+
+# Define the 'properties' symbol group:
+dotnet_naming_symbols.properties.applicable_kinds = property
+dotnet_naming_symbols.properties.applicable_accessibilities = private, protected, internal, public
+
+# Define the 'properties' naming rule
+dotnet_naming_rule.properties_capitalized.symbols = properties
+dotnet_naming_rule.properties_capitalized.style = pascal_case_style
+dotnet_naming_rule.properties_capitalized.severity = warning
+
+# Define the 'class_and_method_naming_rule' naming rule
+dotnet_naming_rule.class_and_method_naming_rule.symbols = classes, methods
+dotnet_naming_rule.class_and_method_naming_rule.style = pascal_case_style
+dotnet_naming_rule.class_and_method_naming_rule.severity = warning
+
+# Define the 'local_variables_naming_rule' naming rule
+dotnet_naming_rule.local_variables_naming_rule.symbols = local_variables
+dotnet_naming_rule.local_variables_naming_rule.style = camel_case_style
+dotnet_naming_rule.local_variables_naming_rule.severity = warning
+
+# Interfaces use PascalCase and are prefixed with uppercase 'I'
+# https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
+dotnet_naming_symbols.interface_group.applicable_kinds = interface
+dotnet_naming_rule.interface_rule.symbols              = interface_group
+dotnet_naming_rule.interface_rule.style                = prefix_interface_with_i_style
+dotnet_naming_rule.interface_rule.severity             = warning
+
+# Generics Type Parameters use PascalCase and are prefixed with uppercase 'T'
+# https://docs.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
+dotnet_naming_symbols.type_parameter_group.applicable_kinds = type_parameter
+dotnet_naming_rule.type_parameter_rule.symbols              = type_parameter_group
+dotnet_naming_rule.type_parameter_rule.style                = prefix_type_parameters_with_t_style
+dotnet_naming_rule.type_parameter_rule.severity             = warning
+
+# Function parameters use camelCase
+# https://docs.microsoft.com/dotnet/standard/design-guidelines/naming-parameters
+dotnet_naming_symbols.parameters_group.applicable_kinds = parameter
+dotnet_naming_rule.parameters_rule.symbols              = parameters_group
+dotnet_naming_rule.parameters_rule.style                = camel_case_style
+dotnet_naming_rule.parameters_rule.severity             = warning
+
+
+# Auto-generated settings
 tab_width = 4
 indent_size = 4
 end_of_line = crlf
@@ -69,12 +156,13 @@ dotnet_style_qualification_for_field = false:silent
 dotnet_style_qualification_for_property = false:silent
 dotnet_style_qualification_for_method = true:warning
 dotnet_style_qualification_for_event = false:silent
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
 [*.cs]
 csharp_indent_labels = one_less_than_current
 csharp_using_directive_placement = outside_namespace:silent
 csharp_prefer_simple_using_statement = true:suggestion
-csharp_prefer_braces = true:silent
-csharp_style_namespace_declarations = block_scoped:silent
+csharp_prefer_braces = true:error
+csharp_style_namespace_declarations = file_scoped:warning
 csharp_style_prefer_method_group_conversion = true:silent
 csharp_style_prefer_top_level_statements = true:silent
 csharp_style_prefer_primary_constructors = true:suggestion
@@ -121,3 +209,31 @@ csharp_style_prefer_extended_property_pattern = true:suggestion
 csharp_style_var_for_built_in_types = false:silent
 csharp_style_var_when_type_is_apparent = false:silent
 csharp_style_var_elsewhere = false:silent
+
+# JSON Files
+[*.{json,json5,webmanifest}]
+indent_size = 2
+
+# YAML Files
+[*.{yml,yaml}]
+indent_size = 2
+
+# Markdown Files
+[*.{md,mdx}]
+trim_trailing_whitespace = false
+
+# Web Files
+[*.{htm,html,js,jsm,ts,tsx,cjs,cts,ctsx,mjs,mts,mtsx,css,sass,scss,less,pcss,svg,vue}]
+indent_size = 2
+
+# Batch Files
+[*.{cmd,bat}]
+end_of_line = crlf
+
+# Bash Files
+[*.sh]
+end_of_line = lf
+
+# Makefiles
+[Makefile]
+indent_style = tab
