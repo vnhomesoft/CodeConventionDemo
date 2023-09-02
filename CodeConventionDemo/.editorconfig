@@ -1,20 +1,23 @@
 # NOTE: No section headers for configuration entries
 # Reference for more: https://github.com/RehanSaeed/EditorConfig/blob/main/.editorconfig
+
+# Set root to false if you want to inherite configuratin from higher levels
 root = true
 
 #### .NET Coding Conventions ####
 
-# this. and Me. preferences
-dotnet_style_qualification_for_method = true:warning
+# Common
+[*]
+trim_trailing_whitespace = true
+max_line_length = 120
+
 
 #### Diagnostic configuration ####
+[*.{cs,vb}]
 
 # CA1000: Do not declare static members on generic types
 dotnet_diagnostic.CA1000.severity = warning
 
-[*.{cs,vb}]
-# Common
-max_line_length = 120
 # IDE0005: Remove unnecessary using directives
 dotnet_diagnostic.IDE0005.severity = warning
 # IDE1006: Naming rule violation
@@ -26,8 +29,9 @@ dotnet_diagnostic.CA1869.severity = warning
 # CA2245: Do not assign a property to itself
 dotnet_diagnostic.CA2245.severity = warning
 
+
 # ======= Groups =======
-#----------------------------- 
+#-----------------------------
 
 # Define the 'interfaces' symbol group:
 dotnet_naming_symbols.interfaces.applicable_kinds = interface
@@ -52,7 +56,7 @@ dotnet_naming_symbols.private_static_fields.required_modifiers = static
 
 
 # ======= Styles =======
-#----------------------------- 
+#-----------------------------
 # Define the 'camel-case' naming style
 dotnet_naming_style.camel_case_style.capitalization = camel_case
 
@@ -77,7 +81,7 @@ dotnet_naming_style.prefix_interface_with_i_style.required_prefix = I
 
 
 # ======= Rules =======
-#------------------------------------------------------------------------------------ 
+#------------------------------------------------------------------------------------
 # Define the 'private_fields_underscored' naming rule
 dotnet_naming_rule.private_fields_underscored.symbols = private_fields
 dotnet_naming_rule.private_fields_underscored.style = underscored
